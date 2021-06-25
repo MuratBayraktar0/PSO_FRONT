@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="stylesheet" href="style/style.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body style="margin: 0; color: rgba(250, 250, 250, 0.9)">
+    <div class="continer">
+      <div class="desktopMenu">
+        <div>
+          <h3 class="logo">PSO</h3>
+          <div class="menu">
+            <div>
+              <a onclick="homeMenu()" href="#home" id="homeMenu">Home</a>
+            </div>
+            <div><a onclick="psoMenu()" href="#pso" id="psoMenu">PSO</a></div>
+            <div>
+              <a onclick="aboutMenu()" href="#about" id="aboutMenu">About</a>
+            </div>
+            <div class="lang">
+              <div onclick="langChange('en')" style="cursor: pointer" id="en">
+                English
+              </div>
+              <div onclick="langChange('tr')" style="cursor: pointer" id="tr">
+                Turkish
+              </div>
+            </div>
+          </div>
+          <div class="copy">
+            <p>
+              &copy; 2021 PSO Feature selection<br />Created by Murat BAYRAKTAR
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="center" id="home">
+        <div class="home_content">
+          <div class="avatar">
+            <div
+              class="image"
+              style="cursor: pointer"
+              id="files"
+              onclick="select()"
+            >
+              <span class="buttonText" id="upload">UPLOAD</span>
+              <span class="buttonText" style="display: none" id="start"
+                >START</span
+              >
+            </div>
+          </div>
+          <div class="details">
+            <h5 class="name">PSO</h5>
+            <p id="text1">
+              Feature selection with particle swarm optimization.<br />
+              Upload the dataset.
+            </p>
+
+            <form id="upload_form" enctype="multipart/form-data" method="post">
+              <div style="border: 1px solid white; border-radius: 5px">
+                <div
+                  id="progressBar"
+                  style="
+                    height: 12px;
+                    transition: 300ms;
+                    border-radius: 3px;
+                    width: 1%;
+                    display: flex;
+                    background-color: rgb(76, 76, 206);
+                  "
+                ></div>
+              </div>
+              <span id="status" style="margin: auto">0%</span>
+            </form>
+            <br />
+            <div class="social">
+              <a href="https://github.com/MuratBayraktar0"
+                ><img class="svg" src="img/github.png" alt=""
+              /></a>
+              <a href="https://www.linkedin.com/in/murat-bayraktar-b704aa189/"
+                ><img class="svg" src="img/linedn.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="center" id="pso" style="display: none">
+        <div class="description">
+          <h3 class="name" id="datasetDesct">Dataset Description</h3>
+          <div class="description_inner">
+            <div class="left">
+              <b id="datasetName">Dataset Name</b>
+            </div>
+            <div class="left" style="margin-left: 50px">
+              <b id="datasetSize">Dataset Size</b>
+            </div>
+          </div>
+          <br />
+          <h3 class="name" id="psoForSetting">PSO For Settings</h3>
+          <div class="description_inner">
+            <div class="left" style="width: 100%">
+              <b id="particleNum">Particle Number</b><br />
+              <input type="number" style="width: 100%" id="particleNumber" />
+            </div>
+            <div class="right" style="width: 100%">
+              <b id="psoIteartion">Iteration Number</b><br />
+              <input id="psoIteartionNum" type="number" style="width: 100%" />
+            </div>
+          </div>
+          <br />
+          <div
+            style="
+              width: 100%;
+              padding-right: 50px;
+              font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman',
+                serif;
+              font-weight: 900;
+            "
+          >
+            <b id="classfier">Classfier Select</b><br />
+            <select id="classfierNum" name="dersler" class="fontSelect">
+              <option class="fontSelect" value="1">K-Nearest Neighbors</option>
+              <option class="fontSelect" value="2">Logistic Regression</option>
+            </select>
+          </div>
+          <br />
+          <div
+            style="display: flex; justify-content: center; align-items: center"
+          >
+            <div class="normal_button" id="runPso">
+              <a>START PSO</a>
+            </div>
+            <div
+              style="
+                border: 1px solid white;
+                border-radius: 5px;
+                width: 100%;
+                margin-left: 20px;
+                height: 40px;
+              "
+            >
+              <div
+                id="progressBar2"
+                style="
+                  height: 100%;
+                  transition: 300ms;
+                  width: 1%;
+                  display: flex;
+                  background-color: white;
+                "
+              ></div>
+              <span id="featureBar" style="position: relative; top: 10px"
+                >Feature Bar</span
+              >
+            </div>
+          </div>
+          <div
+            id="downFile"
+            style="margin-top: 50px; min-height: 0; display: none"
+          >
+            <div
+              style="
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                height: 100px;
+                border-radius: 3px;
+                background-color: rgb(41, 30, 92);
+                box-shadow: 3px 3px 5px gray;
+              "
+              onclick="csvDownload()"
+            >
+              <div
+                style="
+                  width: fit-content;
+                  margin: auto;
+                  color: white;
+                  font-size: 34px;
+                  font-weight: 900;
+                "
+                id="download"
+              >
+                Download
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="center" id="about" style="display: none">
+        <div class="description">
+          <div class="about_image">
+            <img
+              src="img/flock-of-birds-e1541711916589-680x380.jpg"
+              alt=""
+              width="100%"
+              height="300px"
+            />
+          </div>
+
+          <div class="description" style="margin-top: 10px; margin-left: 0">
+            <h3 class="name" id="title">
+              Particle Swarm Optimization Feature Selection
+            </h3>
+            <div
+              class="description_inner"
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+            >
+              <div id="text2">
+                <p>
+                  Particle Swarm Optimization was inspired by the observation
+                  that the actions of some moving animals in the herd, such as
+                  finding food, affect other individuals in the herd, and the
+                  herd more easily achieves its purpose. Kennedy and Dr. It is
+                  an optimization algorithm developed by Eberhart in 1995.
+                </p>
+              </div>
+              <div id="text3">
+                <p>
+                  Classification problems often have a large number of features
+                  in the data sets, but not all of them are useful for
+                  classification. Irrelevant and redundant features may even
+                  reduce the performance. Feature selection aims to choose a
+                  small number of relevant features to achieve similar or even
+                  better classification performance than using all features.
+                </p>
+              </div>
+              <!-- <div class="normal_button" style="margin-top: 10px">
+                <a href="#" id="terminology2">Terminology</a>
+              </div>
+              <div class="normal_button" style="margin-top: 10px">
+                <a href="#">Learn More</a>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="progressBack" id="progresss">
+      <div id="preloader_3"></div>
+    </div>
+    <input
+      type="file"
+      name="file1"
+      id="file1"
+      onchange="uploadFile()"
+      class="inputt"
+    />
+  </body>
+</html>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/language.js"></script>
+<script src="js/fileChoose.js"></script>
+<script src="js/runPSO.js"></script>
